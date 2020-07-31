@@ -27,7 +27,7 @@ class App extends Component {
         {/* 这里用 redirect 进行 首页自动跳转到 /home 路由下
           exact 意味着精确匹配 当为 / 时才跳转 /home 不是包含 / 就跳转到 /home
         */}
-        <Redirect to='/404/'></Redirect>
+        <Redirect to='/404'></Redirect>
       </Switch>
     )
   }

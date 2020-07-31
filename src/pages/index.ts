@@ -11,6 +11,14 @@ const Login = Loadable({
   loader: () => import('./login'),
   loading: Loading,
 });
+const Error404 = Loadable({
+  loader: () => import('../static/error-page/404'),
+  loading: Loading
+});
+const Error401 = Loadable({
+  loader: () => import('../static/error-page/401'),
+  loading: Loading
+});
 export {
-  Home, Login
+  Home, Login, Error404, Error401
 }//将页面导出
