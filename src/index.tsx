@@ -1,3 +1,8 @@
+import {Provider} from 'react-redux'
+import {createStore, applyMiddleware, compose} from 'redux'
+import reducer from './store'
+import thunk from 'redux-thunk' // 支持异步 action
+import logger from 'redux-logger'
 import * as serviceWorker from './serviceWorker';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -7,12 +12,22 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom'
+const store = createStore(
+  reducer,
+  compose(
+    applyMiddleware(thunk),
+    applyMiddleware(logger)
+  )
+)
 
+store.subscribe(() => {}) // 监听state变化
 
 ReactDOM.render(
-  <Router>
-    <Route component={App}></Route>
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <Route component={App}></Route>
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 
