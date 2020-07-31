@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { Button } from 'antd';
 import {useHistory} from 'react-router-dom'
+import request from '../../utils/http'
 
 const Home: FC = () => {
   let histroy = useHistory()
