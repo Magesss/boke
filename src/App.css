@@ -38,3 +38,19 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote,
+dl, dt, dd, ul, ol, li, pre, fieldset, lengend, button, input, textarea,
+th, td {
+  margin: 0;
+  padding: 0;
+}
+#root{
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  position: relative;
+}
