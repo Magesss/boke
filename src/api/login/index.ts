@@ -1,9 +1,5 @@
 import request from '../../utils/http'
-import {async} from "q";
-interface parObject {
-  url: string,
-  option: any
-}
-export async function userLogin(params:parObject){
+
+export async function userLogin(params:any){
   return request.post('/login', params)
 }
