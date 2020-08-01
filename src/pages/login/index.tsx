@@ -4,28 +4,47 @@ import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import {useHistory} from 'react-router-dom'
 import './index.scss';
 import ImgLogo from './logo.png'
+import {userLogin} from '../../api/login'
+import {setToken} from '../../utils/auth'
+import {setStore} from '../../utils/storeUtil'
+import md5 from 'md5'
 
 
 const Login: FC = () => {
-    let history = useHistory()
-    useEffect(() => {
-    })
+  let history = useHistory()
+  useEffect(() => {
+  })
     // ant组件
-    const { TabPane } = Tabs;
+  const { TabPane } = Tabs;
     // 变量集
-    const [active] = useState('1');
-    // 方法集
-    const callback = ()=>{
-
+  const [data, setData] = useState<string>('1');
+  const [user, setUser] = useState<string>('');
+  const [pwd, setPwd] = useState<string>('')
+  // 方法集
+  const callback = ()=>{
+  }
+  const onFinish = async (values:any) => {
+    const res = await userLogin({name: user, pwd: md5(pwd)})
+    if (res.code !== 1) {
+      return;
     }
-    const onFinish = (values:any) => {
-        console.log('Received values of form: ', values);
-        history.push('/home')
-    };
-    const onFinishRegister = (values:any) => {
-        console.log('Received values of form: ', values);
-        history.push('/home')
-    };
+    setToken(res.data)
+    setStore({
+      name: 'access-token',
+      content: res.data
+    })
+    history.push('/home')
+  };
+  const onFinishRegister = (values:any) => {
+    console.log('Received values of form: ', values);
+    history.push('/home')
+  };
+  const handleUserChange = (e:any) => {
+    setUser(e.target.value)
+  }
+  const handlePwdChange = (e: any) => {
+    setPwd(e.target.value)
+  }
   return (
       <div className="page">
         <div className="bg-img">
@@ -38,7 +57,7 @@ const Login: FC = () => {
             <div className="login-logo">
                 <img src={ImgLogo} alt=""/>
             </div>
-            <Tabs defaultActiveKey={active} tabPosition={'top'} onChange={callback} className="tabs" animated={true}>
+            <Tabs defaultActiveKey={data} tabPosition={'top'} onChange={callback} className="tabs" animated={true}>
                 <TabPane tab="登录" key="1">
                     <Form
                         name="login"
@@ -49,16 +68,17 @@ const Login: FC = () => {
                             name="user"
                             rules={[{ required: true, message: '请输入用户名！' }]}
                         >
-                            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="用户名" />
+                            <Input onChange={handleUserChange} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="用户名" />
                         </Form.Item>
                         <Form.Item
                             name="pwd"
                             rules={[{ required: true, message: '请输入密码' }]}
                         >
                             <Input
-                                prefix={<LockOutlined className="site-form-item-icon" />}
-                                type="password"
-                                placeholder="密码"
+                              onChange={handlePwdChange}
+                              prefix={<LockOutlined className="site-form-item-icon" />}
+                              type="password"
+                              placeholder="密码"
                             />
                         </Form.Item>
                         <Button type="primary" htmlType="submit" className="login-form-button">
