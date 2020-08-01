@@ -30,7 +30,7 @@ const judgeOkState = async (res:any) => {
   const cloneRes = await res.clone().json()
   //  TODO: 可以在这管控全局请求
   if(cloneRes.code !== 1) {
-    message.error(`${cloneRes.msg}${cloneRes.code}`)
+    message.error(`${cloneRes.msg}， code:${cloneRes.code}`)
     throw new Error(cloneRes.msg)
   } else {
     return res
@@ -68,7 +68,7 @@ class http {
       mode: 'cors',
       headers: {
         token: null,
-        Authorization: sessionStorage.getItem('assets_token'),
+        Authorization: sessionStorage.getItem('access_token'),
         // 当请求方法是POST，如果不指定content-type是其他类型的话，默认为如下↓，要求参数传递样式为 key1=value1&key2=value2，但实际场景以json为多
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
@@ -77,7 +77,6 @@ class http {
       defaultOptions.headers['Content-Type'] = 'application/json; charset=utf-8';
     }
     const newOptions = { ...defaultOptions, ...options };
-    console.log('newOptions', newOptions);
     return fetch(url, newOptions)
       .then(checkStatus)
       .then(judgeOkState)
