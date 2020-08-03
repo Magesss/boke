@@ -3,10 +3,14 @@ import {
 } from '../pages'
 const routes = [{
   path: '/home',
-  component: Home
+  component: Home,
 }, {
   path: '/login',
-  component: Login
+  component: Login,
+  routes: [{
+    path: '/login/404',
+    component: Error404
+  }]
 }, {
   path: '/404',
   component: Error404
