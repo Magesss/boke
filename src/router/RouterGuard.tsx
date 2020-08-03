@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React,{Component,Fragment} from 'react'
 import {withRouter, RouteComponentProps} from 'react-router-dom'
 import {connect} from 'react-redux'
 import renderRoutesMap from './index'
@@ -24,10 +24,10 @@ class RouterGuard extends Component{
     console.log('routes: ', routes)
     const LoadableComponent = component
     return (
-      <div>
+      <Fragment>
         <LoadableComponent {...this.props} />
         {renderRoutesMap(routes)}
-      </div>
+      </Fragment>
     )
   }
 }

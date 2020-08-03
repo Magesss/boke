@@ -102,12 +102,6 @@ const Login: FC = () => {
                     <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="请输入用户名" />
                   </Form.Item>
                   <Form.Item
-                    name="emil"
-                    rules={[{ required: true, message: '请输入邮箱' }]}
-                  >
-                    <Input prefix={<MailOutlined className="site-form-item-icon"/>} placeholder="请输入邮箱" />
-                  </Form.Item>
-                  <Form.Item
                     name="pwd"
                     rules={[{ required: true, message: '请输入密码！' }]}
                   >
