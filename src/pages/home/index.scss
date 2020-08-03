@@ -56,6 +56,10 @@
     justify-content: space-between;
     flex-wrap: wrap;
     .moduleItem{
+      cursor: pointer;
+      background: #fff;
+      line-height: 150px;
+      text-align: center;
       width: 300px;
       height: 150px;
       margin-bottom: 50px;

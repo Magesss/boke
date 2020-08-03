@@ -1,39 +1,42 @@
 import React, {FC, useState} from 'react';
-import { Button } from 'antd';
 import './index.scss';
-// import {useHistory} from 'react-router-dom'
-//取： useSelector, 发：useDispatch
-// import {useSelector, useDispatch} from 'react-redux'
-import {animated, useSpring} from 'react-spring'
+import {animated, useSpring, useTransition} from 'react-spring'
 
 
 const Home: FC = () => {
-  // const goods = useSelector((state: any) => state.goods)
-  // const dispatch = useDispatch()
-  // let histroy = useHistory()
-  // const testStore = () => {
-  //   // console.log(goods)
-  //   const list:Array<string> = ['肥皂','沐浴露','牙膏','洗牙粉','洗手液','洗面奶','爽肤水','润肤露','润发素','睫毛膏','口红']
-  //   dispatch({
-  //     type: 'fixList',
-  //     data: list[Math.floor(Math.random() * list.length)]
-  //   })
-  // }
-  // 动画配置
   const props = useSpring({opacity: 1, from: {opacity: 0}});
+  const [modules, setModules] = useState([{
+    key: 1,
+    value: '个人图库',
+    state: false
+  }, {
+    key: 2,
+    value: '在线图库',
+    state: false
+  }, {
+    key: 3,
+    value: '上传图片',
+    state: false
+  }, {
+    key: 4,
+    value: '压缩图片',
+    state: false
+  }, {
+    key: 5,
+    value: '系统管理',
+    state: false
+  }, {
+    key: 6,
+    value: '其他功能',
+    state: false
+  }])
+  const transitions = useTransition(modules, item => item.key, {
+    from: { transform: 'translate3d(0,-40px,0)' },
+    enter: { transform: 'translate3d(0,0px,0)' },
+    leave: { transform: 'translate3d(0,-40px,0)' },
+  })
 
   // 变量集
-  const [modules, setModules] = useState<any>(
-      [
-        {name: '个人图库', function: true, router: ''},
-        {name: '在线图库', function: true, router: ''},
-        {name: '上传图片', function: false, router: ''},
-        {name: '压缩图片', function: false, router: ''},
-        {name: '管理图库', function: false, router: ''},
-        {name: '其他功能', function: false, router: ''}
-      ]
-  );
-
   return (
     <div className="home-page">
       <animated.div style={props}>
@@ -45,30 +48,16 @@ const Home: FC = () => {
             <div className="m-bg-mask m-bg-mask3"></div>
           </div>
           <div className="content-box">
-              {
-                modules.map((v:any, index: number ) => {
-                  return <Button className='moduleItem' key={index.toString()} disabled={v.function}>{v.name}</Button>
-                })
-              }
+            {transitions.map(({ item, props, key }) => (<animated.div key={key} style={props}>
+              <div className='moduleItem'>{item.value}</div>
+            </animated.div>))
+            }
           </div>
         </div>
       </animated.div>
     </div>
-    // <div>
-    //   {
-    //     goods.list.map((v:string) => {
-    //       return v
-    //     })
-    //   }
-    //   <Button onClick={testStore} type="primary" size="large">home</Button>
-    // </div>
   )
 };
 
-function mapStateToProps(state:any) {
-  return {
-    goodsList: state.goods.list
-  }
-}
-
+{/*<div className='moduleItem' key={key}>{modules[index].name}</div>*/}
 export default Home;
