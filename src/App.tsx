@@ -8,7 +8,8 @@ import {
 
 class App extends Component {
   componentDidMount() {
-    console.log('app')
+    //对缓存数据 或者权限判断
+    // console.log('app')
   }
   render() {
     return(

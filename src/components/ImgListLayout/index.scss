@@ -1,0 +1,40 @@
+.img-list-layout{
+  display: flex;
+  justify-content: center;
+  color: red;
+  .list-left{
+    margin-top: 100px;
+    background: #f5f5f6;
+    border-radius: 5px;
+    min-width: 20vw;
+    max-width: 200px;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    margin-right: 50px;
+    height: calc(100vh - 200px);
+    overflow-y: scroll;
+  }
+  .list-right{
+    margin-top: 50px;
+    width: 60vw;
+    border-radius: 5px;
+    background: #fff;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    height: calc(100vh - 80px);
+    overflow-y: scroll;
+  }
+  &>div::-webkit-scrollbar {         // 纵向滚动条和横向滚动条宽度
+    width: 5px;
+  }
+  &>div::-webkit-scrollbar-thumb {         // 滚动条背景条样式
+    border-radius: 3px;
+    //-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #bbb;
+  }
+  &>div::-webkit-scrollbar-track {            // 滚动条按钮样式
+    //-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 1px;
+    background: #f5f5f6;
+  }
+}
