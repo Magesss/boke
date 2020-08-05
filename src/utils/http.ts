@@ -2,10 +2,8 @@
 /*
 * 请求方法
 */
-import qs from 'qs'
 import {message} from 'antd'
 
-const {stringify, parse} = qs
 
 interface resObject {
   status: number,

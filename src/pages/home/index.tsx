@@ -1,11 +1,12 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import './index.scss';
 import {animated, useSpring, useTransition} from 'react-spring'
 
 
 const Home: FC = () => {
   const props = useSpring({opacity: 1, from: {opacity: 0}});
-  const [modules, setModules] = useState([{
+  const [modules, setModules] = useState<any>([])
+  useEffect(() => setModules([{
     key: 1,
     value: '个人图库',
     state: false
@@ -29,7 +30,7 @@ const Home: FC = () => {
     key: 6,
     value: '其他功能',
     state: false
-  }])
+  }]), [])
   const transitions = useTransition(modules, item => item.key, {
     from: { transform: 'translate3d(0,-40px,0)' },
     enter: { transform: 'translate3d(0,0px,0)' },
@@ -59,5 +60,4 @@ const Home: FC = () => {
   )
 };
 
-{/*<div className='moduleItem' key={key}>{modules[index].name}</div>*/}
 export default Home;

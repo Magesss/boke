@@ -1,7 +1,8 @@
 import React,{Component,Fragment} from 'react'
-import {withRouter, RouteComponentProps} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import renderRoutesMap from './index'
+import {white} from "color-name";
 
 
 
@@ -15,14 +16,22 @@ class RouterGuard extends Component{
   componentDidMount() {
     // @ts-ignore
     let {history: {replace}, location} = this.props
-    let whiteList:Array<string> = ['/login']
-    if (!sessionStorage.getItem('access_token')) replace('/login')
-    if (location.pathname === '/') replace('./home')
-    // 屏蔽 登录后不能去的页面
-    const i:number = whiteList.findIndex((v) => {
+    let whiteList:Array<string> = ['/login'] // 登录之前能去的路由， 登录之后不能去的路由
+    let isWhite:number = whiteList.findIndex((v) => {
       return location.pathname.includes(v)
     })
-    if(i > -1) replace('/home')
+    // 未登录 无权限
+    if (!sessionStorage.getItem('access_token')) {
+      // -> whiteList / 不阻止   不是 whiteList -> /login
+      if(isWhite === -1) {
+        replace('/login')
+      }
+    } else {
+      //  有权限  -> login / register -> /home
+      if(isWhite > -1) {
+        replace('/home')
+      }
+    }
   }
   render() {
     // @ts-ignore

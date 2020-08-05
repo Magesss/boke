@@ -1,6 +1,6 @@
 import React, { FC, useEffect,useState } from 'react';
 import { Button, Tabs, Form, Input } from 'antd';
-import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {useHistory} from 'react-router-dom'
 import './index.scss';
 import ImgLogo from './logo.png'
@@ -18,7 +18,7 @@ const Login: FC = () => {
     // ant组件
   const { TabPane } = Tabs;
     // 变量集
-  const [data, setData] = useState<string>('1');
+  const [data] = useState<string>('1');
   const [user, setUser] = useState<string>('');
   const [pwd, setPwd] = useState<string>('')
   // 方法集
