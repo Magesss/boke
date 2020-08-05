@@ -7,6 +7,9 @@ import {
 } from 'react-router-dom'
 
 class App extends Component {
+  componentDidMount() {
+    console.log('app')
+  }
   render() {
     return(
       <Switch>

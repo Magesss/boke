@@ -8,14 +8,12 @@ import {userLogin} from '../../api/login'
 import {setToken} from '../../utils/auth'
 import {setStore} from '../../utils/storeUtil'
 import md5 from 'md5'
-import {animated, useSpring} from 'react-spring'
 import BaseLayout from '../../components/BaseLayout'
 
 const Login: FC = () => {
   let history = useHistory()
   useEffect(() => {
   })
-  const props = useSpring({opacity: 1, from: {opacity: 0}})
     // ant组件
   const { TabPane } = Tabs;
     // 变量集

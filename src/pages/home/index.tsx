@@ -1,11 +1,10 @@
 import React, {FC, useState, useEffect} from 'react';
 import './index.scss';
-import {animated, useSpring, useTransition} from 'react-spring'
+import {animated, useTransition} from 'react-spring'
 import BaseLayout from '../../components/BaseLayout'
 
 
 const Home: FC = () => {
-  const props = useSpring({opacity: 1, from: {opacity: 0}});
   const [modules, setModules] = useState<any>([])
   useEffect(() => setModules([{
     key: 1,
