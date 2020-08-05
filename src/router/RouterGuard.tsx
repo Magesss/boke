@@ -2,7 +2,6 @@ import React,{Component,Fragment} from 'react'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import renderRoutesMap from './index'
-import {white} from "color-name";
 
 
 
@@ -10,9 +9,6 @@ const mapStateToProps = (state:any) => (state)
 const mapDispatchToProps = (dispatch:any) => ({ ...dispatch })
 
 class RouterGuard extends Component{
-  // constructor(props:any) {
-  //   super()
-  // }
   componentDidMount() {
     // @ts-ignore
     let {history: {replace}, location} = this.props

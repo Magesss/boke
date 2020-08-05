@@ -1,6 +1,7 @@
 import React, {FC, useState, useEffect} from 'react';
 import './index.scss';
 import {animated, useSpring, useTransition} from 'react-spring'
+import BaseLayout from '../../components/BaseLayout'
 
 
 const Home: FC = () => {
@@ -39,24 +40,14 @@ const Home: FC = () => {
 
   // 变量集
   return (
-    <div className="home-page">
-      <animated.div style={props}>
-        <div>
-          <div className="bg-img">
-            <div className="m-bg-mask m-bg-mask0"></div>
-            <div className="m-bg-mask m-bg-mask1"></div>
-            <div className="m-bg-mask m-bg-mask2"></div>
-            <div className="m-bg-mask m-bg-mask3"></div>
-          </div>
-          <div className="content-box">
-            {transitions.map(({ item, props, key }) => (<animated.div key={key} style={props}>
-              <div className='moduleItem'>{item.value}</div>
-            </animated.div>))
-            }
-          </div>
-        </div>
-      </animated.div>
-    </div>
+    <BaseLayout>
+      <div className="content-box">
+        {transitions.map(({ item, props, key }) => (<animated.div key={key} style={props}>
+          <div className='moduleItem'>{item.value}</div>
+        </animated.div>))
+        }
+      </div>
+    </BaseLayout>
   )
 };
 

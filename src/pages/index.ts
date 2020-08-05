@@ -7,6 +7,14 @@ const Home = Loadable({
   loader: () => import('./home'), //按需加载 点击时只加载一个页面
   loading: Loading,
 });
+const Gallery = Loadable({
+  loader: () => import('./gallery'), //按需加载 点击时只加载一个页面
+  loading: Loading,
+});
+
+
+
+
 const Login = Loadable({
   loader: () => import('./login'),
   loading: Loading,
@@ -21,5 +29,8 @@ const Error401 = Loadable({
 });
 
 export {
-  Home, Login, Error404, Error401
+  Home,
+  Gallery,
+
+  Login, Error404, Error401
 }//将页面导出

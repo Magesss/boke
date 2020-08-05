@@ -1,9 +1,14 @@
 import {
-  Home, Login, Error404, Error401
+  Home,
+  Gallery,
+  Login, Error404, Error401
 } from '../pages'
 const routes = [{
   path: '/home',
   component: Home,
+},{
+  path: '/gallery',
+  component: Gallery,
 }, {
   path: '/login',
   component: Login,

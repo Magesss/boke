@@ -9,6 +9,7 @@ import {setToken} from '../../utils/auth'
 import {setStore} from '../../utils/storeUtil'
 import md5 from 'md5'
 import {animated, useSpring} from 'react-spring'
+import BaseLayout from '../../components/BaseLayout'
 
 const Login: FC = () => {
   let history = useHistory()
@@ -47,90 +48,80 @@ const Login: FC = () => {
     setPwd(e.target.value)
   }
   return (
-    <div className="page">
-      <animated.div style={props}>
-        <div>
-          <div className="bg-img">
-            <div className="m-bg-mask m-bg-mask0"></div>
-            <div className="m-bg-mask m-bg-mask1"></div>
-            <div className="m-bg-mask m-bg-mask2"></div>
-            <div className="m-bg-mask m-bg-mask3"></div>
-          </div>
-          <div className="form-box">
-            <div className="login-logo">
-              <img src={ImgLogo} alt=""/>
-            </div>
-            <Tabs defaultActiveKey={data} tabPosition={'top'} onChange={callback} className="tabs" animated={true}>
-              <TabPane tab="登录" key="1">
-                <Form
-                  name="login"
-                  className="login-form"
-                  onFinish={onFinish}
-                >
-                  <Form.Item
-                    name="user"
-                    rules={[{ required: true, message: '请输入用户名！' }]}
-                  >
-                    <Input onChange={handleUserChange} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="用户名" />
-                  </Form.Item>
-                  <Form.Item
-                    name="pwd"
-                    rules={[{ required: true, message: '请输入密码' }]}
-                  >
-                    <Input
-                      onChange={handlePwdChange}
-                      prefix={<LockOutlined className="site-form-item-icon" />}
-                      type="password"
-                      placeholder="密码"
-                    />
-                  </Form.Item>
-                  <Button type="primary" htmlType="submit" className="login-form-button">
-                    登 录
-                  </Button>
-                </Form>
-              </TabPane>
-              <TabPane tab="注册" key="2">
-                <Form
-                  name="login"
-                  className="register-form"
-                  onFinish={onFinishRegister}
-                >
-                  <Form.Item
-                    name="username"
-                    rules={[{ required: true, message: 'Please input your Username!' }]}
-                  >
-                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="请输入用户名" />
-                  </Form.Item>
-                  <Form.Item
-                    name="pwd"
-                    rules={[{ required: true, message: '请输入密码！' }]}
-                  >
-                    <Input
-                      prefix={<LockOutlined className="site-form-item-icon" />}
-                      type="password"
-                      placeholder="请输入密码"
-                    />
-                  </Form.Item>
-                  <Form.Item
-                    name="surePwd"
-                    rules={[{ required: true, message: '请再次输入密码' }]}
-                  >
-                    <Input
-                      prefix={<LockOutlined className="site-form-item-icon" />}
-                      type="password"
-                      placeholder="确认密码"
-                    />
-                  </Form.Item>
-                  <Button type="primary" htmlType="submit" className="login-form-button">
-                    注 册
-                  </Button>
-                </Form>
-              </TabPane>
-            </Tabs>
-          </div>
+    <BaseLayout>
+      <div className="form-box">
+        <div className="login-logo">
+          <img src={ImgLogo} alt=""/>
         </div>
-      </animated.div>
-    </div>
+        <Tabs defaultActiveKey={data} tabPosition={'top'} onChange={callback} className="tabs" animated={true}>
+          <TabPane tab="登录" key="1">
+            <Form
+              name="login"
+              className="login-form"
+              onFinish={onFinish}
+            >
+              <Form.Item
+                name="user"
+                rules={[{ required: true, message: '请输入用户名！' }]}
+              >
+                <Input onChange={handleUserChange} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="用户名" />
+              </Form.Item>
+              <Form.Item
+                name="pwd"
+                rules={[{ required: true, message: '请输入密码' }]}
+              >
+                <Input
+                  onChange={handlePwdChange}
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder="密码"
+                />
+              </Form.Item>
+              <Button type="primary" htmlType="submit" className="login-form-button">
+                登 录
+              </Button>
+            </Form>
+          </TabPane>
+          <TabPane tab="注册" key="2">
+            <Form
+              name="login"
+              className="register-form"
+              onFinish={onFinishRegister}
+            >
+              <Form.Item
+                name="username"
+                rules={[{ required: true, message: 'Please input your Username!' }]}
+              >
+                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="请输入用户名" />
+              </Form.Item>
+              <Form.Item
+                name="pwd"
+                rules={[{ required: true, message: '请输入密码！' }]}
+              >
+                <Input
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder="请输入密码"
+                />
+              </Form.Item>
+              <Form.Item
+                name="surePwd"
+                rules={[{ required: true, message: '请再次输入密码' }]}
+              >
+                <Input
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder="确认密码"
+                />
+              </Form.Item>
+              <Button type="primary" htmlType="submit" className="login-form-button">
+                注 册
+              </Button>
+            </Form>
+          </TabPane>
+        </Tabs>
+      </div>
+    </BaseLayout>
   )
 };
 
