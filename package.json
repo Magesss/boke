@@ -152,6 +152,8 @@
   },
   "devDependencies": {
     "@types/js-cookie": "^2.2.6",
+    "@types/lodash": "^4.14.158",
+    "@types/lodash-es": "^4.17.3",
     "@types/md5": "^2.2.0",
     "@types/qs": "^6.9.4",
     "@types/react-redux": "^7.1.9",
@@ -159,9 +161,13 @@
     "@types/redux-thunk": "^2.1.0",
     "@types/styled-components": "^5.1.2",
     "js-cookie": "^2.2.1",
+    "lodash": "^4.17.19",
+    "lodash-es": "^4.17.15",
+    "lodash-move": "^1.1.1",
     "md5": "^2.2.1",
     "node-sass": "^4.14.1",
     "react-spring": "^8.0.27",
+    "react-use-gesture": "^7.0.15",
     "redux-logger": "^3.0.6",
     "styled-components": "^5.1.1"
   }
