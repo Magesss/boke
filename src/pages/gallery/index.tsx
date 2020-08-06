@@ -1,29 +1,54 @@
-import React, {useRef} from 'react'
+import React, {useEffect, FC, useState} from 'react'
 import BaseLayout from '../../components/BaseLayout'
 import ImgListLayout from '../../components/ImgListLayout'
-import clamp from 'lodash-es/clamp' //工具函数
+import './index.scss'
 import swap from '../../utils/move' //工具函数
-import {useGesture} from 'react-use-gesture' //手势库
-import {useSprings, animated, interpolate} from 'react-spring' //动画库
+import {useTrail, animated} from 'react-spring'
 
-//返回拖动/空闲项的管件样式
-const fn = (order:any, down:any, originalIndex:number, curIndex:number, y:any) => (index:number) =>
-  down && index === originalIndex
-    ? { y: curIndex * 100 + y, scale: 1.1, zIndex: '1', shadow: 15, immediate: (n:string) => n === 'y' || n === 'zIndex' }
-    : { y: order.indexOf(index) * 100, scale: 1, zIndex: '0', shadow: 1, immediate: false }
-
-
-const Galley = () => {
-  const items:Array<string> = 'Lorem ipsum dolor sit'.split(' ')
-
-
+const Galley:FC = () => {
+  //定义初始化数据
+  const [items, setItems] = useState<Array<string>>('Lorem ipsum dolor sit'.split(' '))
+  const [state, setState] = useState<number>(0)
+  //创建弹簧，每个弹簧对应一个项目，控制其变换、缩放等。
+  const config = { mass: 5, tension: 2000, friction: 200 }
+  const [trail, setTrail] = useTrail(items.length, () => ({
+    y: -150,
+    state: state,
+    config,
+  }))
+  useEffect(() => {
+    //@ts-ignore
+    setTrail({ y: 0 })
+  }, [])
+  const handleType = (e:any, i:number) => {
+    //@ts-ignore
+    setTrail({ state: i })
+  }
   return(
     <BaseLayout>
       <ImgListLayout>
-        <div className='1' data-position="left">
-          123
+        <div data-position="left" >
+          <div className='content'>
+            {
+              trail.map((props:any, i:number) => (
+                  <animated.div
+                    key={i}
+                    onClick={(e) => handleType(e, i)}
+                    style={{
+                      background: props.state.interpolate((state:number) => ((i === state) ? `linear-gradient(135deg, #f6d365 0%, #fda085 100%)` : `linear-gradient(135deg, #c3cfe2 0%, #c3cfe2 100%)` )),
+                      transform: props.y.interpolate((y:number) => `translate3d(0,${y-30}px,0)`)
+                    }}
+                  >
+                    <animated.div className='ces' style={{ height: props.y }}>{items[i]}</animated.div>
+                  </animated.div>
+                )
+              )
+            }
+          </div>
         </div>
-        <div className='1' data-position="right">55555555</div>
+        <div className='1' onClick={() => {
+          console.log(state)
+        }} data-position="right">55555555</div>
       </ImgListLayout>
     </BaseLayout>
   )
