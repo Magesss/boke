@@ -4,6 +4,7 @@ import ImgListLayout from '../../components/ImgListLayout'
 import './index.scss'
 import swap from '../../utils/move' //工具函数
 import {useTrail, animated} from 'react-spring'
+import ImgList from '../../components/ImgList'
 
 const Galley:FC = () => {
   //定义初始化数据
@@ -21,8 +22,7 @@ const Galley:FC = () => {
     setTrail({ y: 0 })
   }, [])
   const handleType = (e:any, i:number) => {
-    //@ts-ignore
-    setTrail({ state: i })
+    setState(i)
   }
   return(
     <BaseLayout>
@@ -35,7 +35,8 @@ const Galley:FC = () => {
                     key={i}
                     onClick={(e) => handleType(e, i)}
                     style={{
-                      background: props.state.interpolate((state:number) => ((i === state) ? `linear-gradient(135deg, #f6d365 0%, #fda085 100%)` : `linear-gradient(135deg, #c3cfe2 0%, #c3cfe2 100%)` )),
+                      top: `${i * 110 + 10}px`,
+                      background: (i === state) ? `linear-gradient(135deg, #f6d365 0%, #fda085 100%)` : `linear-gradient(135deg, #c3cfe2 0%, #c3cfe2 100%)`,
                       transform: props.y.interpolate((y:number) => `translate3d(0,${y-30}px,0)`)
                     }}
                   >
@@ -46,9 +47,9 @@ const Galley:FC = () => {
             }
           </div>
         </div>
-        <div className='1' onClick={() => {
-          console.log(state)
-        }} data-position="right">55555555</div>
+        <div data-position="right">
+          {ImgList()}
+        </div>
       </ImgListLayout>
     </BaseLayout>
   )
